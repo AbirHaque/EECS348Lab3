@@ -45,7 +45,7 @@ int main(void) {
     char* months[num_months]={"January","February","March","April","May","June","July","August","September","October","November","December"};
     int sorted_indices_hi2lo[num_months];
 
-    printf("\nEnter filename: ");
+    printf("Enter filename: ");
     fflush( stdout );
     scanf("%s",filename);
     FILE* fp;
@@ -53,7 +53,7 @@ int main(void) {
     printf("Monthly sales report for 2022\n\nMonth Sales\n");
     for (int i = 0; i < num_months; i++) {
         fgets((char * restrict) data[i], buf_len, fp);
-        printf("%s:\t$%s",(char*)months[i],(char*)data[i]);
+        printf("%-15s$%s",(char*)months[i],(char*)data[i]);
         sales[i]=atof((const char *)data[i]);
     }
     fclose(fp);
@@ -61,19 +61,19 @@ int main(void) {
     bubble_sort_hi2lo_indices(sales,sorted_indices_hi2lo,num_months);
 
     printf("\n\nSales summary:\n");
-    printf("Minimum sales:\t$%.2f (%s)\n",sales[sorted_indices_hi2lo[num_months-1]],months[sorted_indices_hi2lo[num_months-1]]);
-    printf("Maximum sales:\t$%.2f (%s)\n",sales[sorted_indices_hi2lo[0]],months[sorted_indices_hi2lo[0]]);
-    printf("Average sales:\t$%.2f\n",round_2(average(sales,0,num_months,num_months)));
+    printf("%-15s$%.2f (%s)\n","Minimum sales",sales[sorted_indices_hi2lo[num_months-1]],months[sorted_indices_hi2lo[num_months-1]]);
+    printf("%-15s$%.2f (%s)\n","Maximum sales",sales[sorted_indices_hi2lo[0]],months[sorted_indices_hi2lo[0]]);
+    printf("%-15s$%.2f\n","Average sales",round_2(average(sales,0,num_months,num_months)));
 
     printf("\nSix-Month moving average report:\n");
     int window_size=6;
     for(int i = 0; i < window_size+1;i++)
-        printf("%s-%s\t%.2f\n",months[i],months[window_size+i-1],round_2(average(sales,i,window_size+i,window_size)));
+        printf("%-10s- %-15s$%.2f\n",months[i],months[window_size+i-1],round_2(average(sales,i,window_size+i,window_size)));
     
 
     printf("\nSales report (highest to lowest):\n\nMonth Sales\n");
     for(int i = 0; i < num_months; i ++)
-        printf("%s\t$%.2f\n",months[sorted_indices_hi2lo[i]],sales[sorted_indices_hi2lo[i]]);
+        printf("%-15s$%.2f\n",months[sorted_indices_hi2lo[i]],sales[sorted_indices_hi2lo[i]]);
 
     fflush( stdout );
     return 0;
