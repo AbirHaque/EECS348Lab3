@@ -45,11 +45,12 @@ int rec_score(struct Set * set_val,int score, int td, int fg, int safety, int td
 		append(set_val,tmp,5);
 	}
 	if (cur_score<score){
-		return rec_score(set_val,score, td+1, fg, safety, td_2c, td_fg)|
-		rec_score(set_val,score, td, fg+1, safety, td_2c, td_fg)|
+		return
 		rec_score(set_val, score, td, fg, safety+1, td_2c, td_fg)|
-		rec_score(set_val,score, td, fg, safety, td_2c+1, td_fg)|
-		rec_score(set_val,score, td, fg, safety, td_2c, td_fg+1);
+		rec_score(set_val,score, td, fg+1, safety, td_2c, td_fg)|
+		rec_score(set_val,score, td+1, fg, safety, td_2c, td_fg)|
+		rec_score(set_val,score, td, fg, safety, td_2c, td_fg+1)|
+		rec_score(set_val,score, td, fg, safety, td_2c+1, td_fg);
 	}
 	return 0;
 }
