@@ -59,7 +59,6 @@ int main(void){
 	float request_stop=false;
 	int nfl_score;
 	struct Set set;
-	set.len=0;
 	while(true){
 		printf("Enter 0 or 1 to STOP: ");
 		fflush(stdout);
@@ -71,6 +70,7 @@ int main(void){
 		fflush(stdout);
 	    scanf("%d",&nfl_score);
 	    printf("\nPossible combinations of scoring plays: \n");
+		set.len=0;
 	    rec_score(&set,nfl_score,0,0,0,0,0);
 		for(int i = 0; i<set.len;i++){
 			printf("%i TD + 2pt, %i TD + FG, %i TD, %i 3pt FG, %i Safety\n",set.arr[i][0],set.arr[i][1],set.arr[i][2],set.arr[i][3],set.arr[i][4]);
